@@ -1,0 +1,22 @@
+{
+  "name": "pagebook",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "pinia": "^2.0.16",
+    "pinia-plugin-persist": "^1.0.0",
+    "rollup-plugin-svg-sprites": "^1.2.4",
+    "vue": "^3.2.37",
+    "vue-router": "4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "2.3.3",
+    "vite": "2.9.9"
+  }
+}

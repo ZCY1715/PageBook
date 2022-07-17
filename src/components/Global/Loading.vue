@@ -1,0 +1,50 @@
+<template>
+  <div :class="$style.loader">
+    <p></p>
+  </div>
+</template>
+
+<style module>
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 8px solid;
+  border-color: var(--theme-color);
+  border-radius: 50%;
+  transform: rotate(45deg);
+  margin: 30px auto;
+}
+
+.loader p {
+  display: inline-block;
+  width: 55px;
+  height: 55px;
+  /* The background is used to specify the border background */
+  background: linear-gradient(90deg, hsla(212, 67%, 36%, 0) 0%,
+      hsla(207, 69%, 51%, 0) 76%,
+      hsla(0, 0%, 100%, 1) 85%,
+      hsla(0, 0%, 100%, 1) 100%);
+  /* W3C */
+  /* Background origin is the padding box by default.
+  Override to make the background cover the border as well. */
+  -moz-background-origin: border;
+  background-origin: border-box;
+  /* A transparent border determines the width */
+  border: 6px solid transparent;
+  border-radius: 50%;
+  box-shadow: inset -999px 0 0 #fff;
+  /* The background color */
+  transform: translate(-8px, 55px);
+  animation: loading 1s linear infinite;
+}
+
+@keyframes loading {
+  0% {
+    transform: translate(-9px, -25px) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(-9px, -25px) rotate(360deg);
+  }
+}
+</style>
