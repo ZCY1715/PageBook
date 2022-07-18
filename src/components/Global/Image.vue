@@ -1,5 +1,5 @@
 <script>
-import Loading from './loading.vue'
+import Loading from './Loading.vue'
 
 export default {
   data() {
