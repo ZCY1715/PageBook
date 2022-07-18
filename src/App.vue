@@ -11,15 +11,10 @@ export default {
       store: useStore(),
     };
   },
-  methods: {
-    toDrawer(index) {
-      this.store.DrawerIndex = index
-    },
-  },
   components: { Drawer },
   mounted() {
     this.$nextTick(() => {
-      this.store.initThemeColor()
+      this.store.themeColor.initThemeColor()
       live2dInit()
     })
   }
@@ -27,8 +22,9 @@ export default {
 </script>
 
 <template>
-  <Drawer v-for="(item, index) of drawerList" :data="item" :key="index" :targetIndex="store.DrawerIndex" :index="index"
-    @switch="() => toDrawer(index)" />
+  <!-- 侧栏 -->
+  <Drawer v-for="(item, index) of drawerList" :data="item" :key="index" :index="index" />
+  <!-- 主界面 -->
   <div :class="[$style.container, 'scrollY']">
     <router-view />
   </div>
@@ -38,6 +34,7 @@ export default {
 .container {
   width: 100vw;
   height: 100vh;
+  background-color: var(--home-background);
   position: relative;
 }
 </style>

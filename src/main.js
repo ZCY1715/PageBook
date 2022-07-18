@@ -9,10 +9,10 @@ import ImportGlobalComponent from './ImportGlobalComponent'
 const app = createApp(App)
 app.use(Router)
 
-ImportGlobalComponent(app)
-
 const Pinia = createPinia()
 Pinia.use(piniaPluginPersist)
 app.use(Pinia)
+
+ImportGlobalComponent(app)
 
 app.mount('#app')

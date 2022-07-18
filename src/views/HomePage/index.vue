@@ -1,28 +1,16 @@
 <script>
-import useStore from "../../store"
+import Banner from './Banner.vue'
 
 export default {
-  data() {
-    return {
-      store: useStore(),
-    }
-  }
-}
+  components: { Banner }
 
+}
 </script>
 
 <template>
-  <img :src="store.config.bannerImg" :class="$style.bannerImg" @click="() => store.switchThemeColor()">
+  <Banner />
+  <div style="height: 2000px;width: 100%;"></div>
 </template>
 
 <style module>
-.bannerImg {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  filter: brightness(var(--banner-brightness));
-}
 </style>

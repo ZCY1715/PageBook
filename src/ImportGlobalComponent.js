@@ -1,6 +1,6 @@
 // 导入全局自定义组件
 
-const moduleFiles = import.meta.glob('./components/Global/*.vue')
+const moduleFiles = import.meta.globEager('./components/Global/*.vue')
 
 export default (app) => {
   for (let module of Object.keys(moduleFiles)) {

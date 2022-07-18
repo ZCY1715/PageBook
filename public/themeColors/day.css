@@ -1,8 +1,12 @@
 :root {
   --selection-background: rgb(0, 0, 0);
   --selection-color: rgb(252, 191, 101);
-  --banner-brightness: 1.2;
+  --banner-brightness: 1.1;
   --drawer-target: #fff;
   --drawer-no-target: #ddd;
   --font-color-normal: #000;
+  --home-background: #eee;
+  --loading-color-1: #eeeeee;
+  --loading-color-2: #aaaaaa;
+  --wave-brightness: 1.3;
 }

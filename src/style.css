@@ -53,6 +53,8 @@ svg {
   width: inherit;
   height: inherit;
   opacity: .7;
+  fill: #fff;
+  transition: .3s;
 }
 
 .scrollX {

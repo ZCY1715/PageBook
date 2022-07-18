@@ -1,50 +1,167 @@
 <template>
   <div :class="$style.loader">
-    <p></p>
+    <span :class="$style['loader-block']"></span>
+    <span :class="$style['loader-block']"></span>
+    <span :class="$style['loader-block']"></span>
+    <span :class="$style['loader-block']"></span>
+    <span :class="$style['loader-block']"></span>
+    <span :class="$style['loader-block']"></span>
+    <span :class="$style['loader-block']"></span>
+    <span :class="$style['loader-block']"></span>
+    <span :class="$style['loader-block']"></span>
   </div>
 </template>
 
 <style module>
 .loader {
-  width: 50px;
-  height: 50px;
-  border: 8px solid;
-  border-color: var(--theme-color);
-  border-radius: 50%;
-  transform: rotate(45deg);
-  margin: 30px auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 7.33333em;
+  height: 7.33333em;
+  margin-left: -3.66667em;
+  margin-top: -3.66667em;
 }
 
-.loader p {
+.loader-block {
+  position: absolute;
+  top: 0;
+  left: 0;
   display: inline-block;
-  width: 55px;
-  height: 55px;
-  /* The background is used to specify the border background */
-  background: linear-gradient(90deg, hsla(212, 67%, 36%, 0) 0%,
-      hsla(207, 69%, 51%, 0) 76%,
-      hsla(0, 0%, 100%, 1) 85%,
-      hsla(0, 0%, 100%, 1) 100%);
-  /* W3C */
-  /* Background origin is the padding box by default.
-  Override to make the background cover the border as well. */
-  -moz-background-origin: border;
-  background-origin: border-box;
-  /* A transparent border determines the width */
-  border: 6px solid transparent;
-  border-radius: 50%;
-  box-shadow: inset -999px 0 0 #fff;
-  /* The background color */
-  transform: translate(-8px, 55px);
-  animation: loading 1s linear infinite;
+  opacity: 0;
+  width: 2em;
+  height: 2em;
+  background: var(--loading-color-1);
+  -webkit-animation: show 0.88s step-end infinite alternate, pulse 0.88s linear infinite alternate;
+  animation: show 0.88s step-end infinite alternate, pulse 0.88s linear infinite alternate;
 }
 
-@keyframes loading {
-  0% {
-    transform: translate(-9px, -25px) rotate(0deg);
+.loader-block:nth-child(1) {
+  -moz-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  -webkit-transform: translate(0, 0);
+  transform: translate(0, 0);
+  -webkit-animation-delay: 0.065s;
+  animation-delay: 0.065s;
+}
+
+.loader-block:nth-child(2) {
+  -moz-transform: translate(2.66667em, 0);
+  -ms-transform: translate(2.66667em, 0);
+  -webkit-transform: translate(2.66667em, 0);
+  transform: translate(2.66667em, 0);
+  -webkit-animation-delay: 0.13s;
+  animation-delay: 0.13s;
+}
+
+.loader-block:nth-child(3) {
+  -moz-transform: translate(5.33333em, 0);
+  -ms-transform: translate(5.33333em, 0);
+  -webkit-transform: translate(5.33333em, 0);
+  transform: translate(5.33333em, 0);
+  -webkit-animation-delay: 0.195s;
+  animation-delay: 0.195s;
+}
+
+.loader-block:nth-child(4) {
+  -moz-transform: translate(0, 2.66667em);
+  -ms-transform: translate(0, 2.66667em);
+  -webkit-transform: translate(0, 2.66667em);
+  transform: translate(0, 2.66667em);
+  -webkit-animation-delay: 0.325s;
+  animation-delay: 0.325s;
+}
+
+.loader-block:nth-child(5) {
+  -moz-transform: translate(2.66667em, 2.66667em);
+  -ms-transform: translate(2.66667em, 2.66667em);
+  -webkit-transform: translate(2.66667em, 2.66667em);
+  transform: translate(2.66667em, 2.66667em);
+  -webkit-animation-delay: 0.13s;
+  animation-delay: 0.13s;
+}
+
+.loader-block:nth-child(6) {
+  -moz-transform: translate(5.33333em, 2.66667em);
+  -ms-transform: translate(5.33333em, 2.66667em);
+  -webkit-transform: translate(5.33333em, 2.66667em);
+  transform: translate(5.33333em, 2.66667em);
+  -webkit-animation-delay: 0.455s;
+  animation-delay: 0.455s;
+}
+
+.loader-block:nth-child(7) {
+  -moz-transform: translate(0, 5.33333em);
+  -ms-transform: translate(0, 5.33333em);
+  -webkit-transform: translate(0, 5.33333em);
+  transform: translate(0, 5.33333em);
+  -webkit-animation-delay: 0.39s;
+  animation-delay: 0.39s;
+}
+
+.loader-block:nth-child(8) {
+  -moz-transform: translate(2.66667em, 5.33333em);
+  -ms-transform: translate(2.66667em, 5.33333em);
+  -webkit-transform: translate(2.66667em, 5.33333em);
+  transform: translate(2.66667em, 5.33333em);
+  -webkit-animation-delay: 0.26s;
+  animation-delay: 0.26s;
+}
+
+.loader-block:nth-child(9) {
+  -moz-transform: translate(5.33333em, 5.33333em);
+  -ms-transform: translate(5.33333em, 5.33333em);
+  -webkit-transform: translate(5.33333em, 5.33333em);
+  transform: translate(5.33333em, 5.33333em);
+}
+
+@-webkit-keyframes pulse {
+
+  from,
+  40% {
+    background: var(--loading-color-1);
   }
 
-  100% {
-    transform: translate(-9px, -25px) rotate(360deg);
+  to {
+    background: var(--loading-color-2);
+  }
+}
+
+@-webkit-keyframes show {
+
+  from,
+  40% {
+    opacity: 0;
+  }
+
+  41%,
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+
+  from,
+  40% {
+    background: var(--loading-color-1);
+  }
+
+  to {
+    background: var(--loading-color-2);
+  }
+}
+
+@keyframes show {
+
+  from,
+  40% {
+    opacity: 0;
+  }
+
+  41%,
+  to {
+    opacity: 1;
   }
 }
 </style>
