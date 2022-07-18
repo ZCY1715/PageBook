@@ -96,29 +96,31 @@ export default {
   pointer-events: all;
 }
 
-.leftContainer .main,
 .rightContainer .main {
+  box-shadow: #ddd 2px 2px 5px;
   background-color: #ddd;
   animation: mainRightToLeft 2s;
-  box-shadow: fff 2px 2px 5px;
+}
+
+.leftContainer .main {
+  background-color: #ddd;
+  animation: mainRightToLeft 2s;
 }
 
 @keyframes mainRightToLeft {
   0% {
     background-color: #fff;
-    box-shadow: #ddd 2px 2px 5px;
   }
 
   100% {
     background-color: #ddd;
-    box-shadow: #fff 2px 2px 5px;
   }
 }
 
 .targetContainer .main {
   background-color: #fff;
-  animation: mainLeftToRight 2s;
   box-shadow: #fff 2px 2px 5px;
+  animation: mainLeftToRight 2s;
 }
 
 @keyframes mainLeftToRight {
