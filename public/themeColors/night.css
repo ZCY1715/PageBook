@@ -1,0 +1,8 @@
+:root {
+  --selection-background: rgb(255, 255, 255);
+  --selection-color: rgb(91, 228, 91);
+  --banner-brightness: .8;
+  --drawer-target: #000;
+  --drawer-no-target: #222;
+  --font-color-normal: #fff;
+}

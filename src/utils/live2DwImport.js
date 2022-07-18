@@ -1,3 +1,5 @@
+// live2d 模型配置
+
 export default function live2dInit() {
   window.L2Dwidget.init({
     pluginRootPath: './statics/live2dw/',

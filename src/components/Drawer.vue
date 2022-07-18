@@ -3,10 +3,10 @@ export default {
   props: ['data', 'targetIndex', 'index'],
   computed: {
     name() {
-      return this.data.name || 'Home'
+      return this.data.name
     },
     title() {
-      return this.data.title || '主页'
+      return this.data.title
     },
     isTarget() {
       return this.targetIndex === this.index
@@ -92,46 +92,46 @@ export default {
   padding: 30px 30px 30px 60px;
   margin-bottom: 5px;
   border-radius: 0 20px 20px 0;
-  background-color: #fff;
+  background-color: var(--drawer-target);
   pointer-events: all;
 }
 
 .rightContainer .main {
-  box-shadow: #ddd 2px 2px 5px;
-  background-color: #ddd;
+  box-shadow: var(--drawer-no-target) 2px 2px 5px;
+  background-color: var(--drawer-no-target);
   animation: mainRightToLeft 2s;
 }
 
 .leftContainer .main {
-  background-color: #ddd;
+  background-color: var(--drawer-no-target);
   animation: mainRightToLeft 2s;
 }
 
 @keyframes mainRightToLeft {
   0% {
-    background-color: #fff;
+    background-color: var(--drawer-target);
   }
 
   100% {
-    background-color: #ddd;
+    background-color: var(--drawer-no-target);
   }
 }
 
 .targetContainer .main {
-  background-color: #fff;
-  box-shadow: #fff 2px 2px 5px;
+  background-color: var(--drawer-target);
+  box-shadow: var(--drawer-target) 2px 2px 5px;
   animation: mainLeftToRight 2s;
 }
 
 @keyframes mainLeftToRight {
   0% {
-    background-color: #ddd;
-    box-shadow: #ddd 2px 2px 5px;
+    background-color: var(--drawer-no-target);
+    box-shadow: var(--drawer-no-target) 2px 2px 5px;
   }
 
   100% {
-    background-color: #fff;
-    box-shadow: #fff 2px 2px 5px;
+    background-color: var(--drawer-target);
+    box-shadow: var(--drawer-target) 2px 2px 5px;
   }
 }
 
@@ -156,20 +156,18 @@ export default {
   justify-content: center;
   border-radius: 0 10px 10px 0;
   cursor: pointer;
-  transition: 2s;
-  color: #000;
   pointer-events: all;
   cursor: var(--pointer);
 }
 
 .targetBth {
-  background-color: #fff;
-  box-shadow: #fff 2px 2px 5px;
+  background-color: var(--drawer-target);
+  box-shadow: var(--drawer-target) 2px 2px 5px;
 }
 
 .leftBth,
 .rightBth {
-  background-color: #ddd;
-  box-shadow: #ddd 2px 2px 5px;
+  background-color: var(--drawer-no-target);
+  box-shadow: var(--drawer-no-target) 2px 2px 5px;
 }
 </style>

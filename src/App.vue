@@ -2,31 +2,24 @@
 import Drawer from './components/Drawer.vue'
 import useStore from './store'
 import live2dInit from './utils/live2DwImport'
+import { drawerList } from './routers'
 
 export default {
   data() {
     return {
-      drawerList: [
-        {
-          name: 'About',
-          title: '关于',
-        },
-        {
-          name: 'Code',
-          title: '代码',
-        }
-      ],
+      drawerList,
       store: useStore(),
     };
   },
   methods: {
     toDrawer(index) {
-      this.store.PageIndex = index
+      this.store.DrawerIndex = index
     },
   },
   components: { Drawer },
   mounted() {
     this.$nextTick(() => {
+      this.store.initThemeColor()
       live2dInit()
     })
   }
@@ -34,9 +27,9 @@ export default {
 </script>
 
 <template>
+  <Drawer v-for="(item, index) of drawerList" :data="item" :key="index" :targetIndex="store.DrawerIndex" :index="index"
+    @switch="() => toDrawer(index)" />
   <div :class="[$style.container, 'scrollY']">
-    <Drawer v-for="(item, index) of drawerList" :data="item" :key="index" :targetIndex="store.PageIndex" :index="index"
-      @switch="() => toDrawer(index)" />
     <router-view />
   </div>
 </template>

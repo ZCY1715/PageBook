@@ -12,7 +12,7 @@ export default {
 </script>
 
 <template>
-  <img :src="store.config.bannerImg" :class="$style.bannerImg">
+  <img :src="store.config.bannerImg" :class="$style.bannerImg" @click="() => store.switchThemeColor()">
 </template>
 
 <style module>
@@ -23,5 +23,6 @@ export default {
   width: 100vw;
   height: 100vh;
   object-fit: cover;
+  filter: brightness(var(--banner-brightness));
 }
 </style>

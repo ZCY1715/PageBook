@@ -1,27 +1,41 @@
 import { defineStore } from 'pinia'
-import bannerImg from '../assets/bg.jpg'
-
+import { themeColor } from '../utils/constent'
+import { initThemeColor, switchThemeColor } from '../utils/themeColorImport'
+import config from '../utils/config'
 
 const useStore = defineStore('store', {
   state() {
     return {
-      PageIndex: Number.MAX_SAFE_INTEGER,
-      randomImgAPI: 'https://www.dmoe.cc/random.php',
-      config: {
-        bannerImg: bannerImg,
-      }
+      DrawerIndex: Number.MAX_SAFE_INTEGER,
+      themeColor: null,
+      config,
     }
   },
-  // persist: {
-  //   enabled: true,
-  //   storage: localStorage,
-  //   strategies: [
-  //     {
-  //       storage: localStorage, // sessionStorage 
-  //       paths: ['PageIndex']
-  //     }
-  //   ]
-  // }
+  actions: {
+    hideSidebar() {
+      this.DrawerIndex = Number.MAX_SAFE_INTEGER
+    },
+    initThemeColor() {
+      if (Boolean(this.themeColor)) {
+        initThemeColor(this.themeColor)
+      } else {
+        this.themeColor = initThemeColor()
+      }
+    },
+    switchThemeColor() {
+      this.themeColor = this.themeColor === themeColor.DAY ? themeColor.NIGHT : themeColor.DAY
+      switchThemeColor(this.themeColor)
+    }
+  },
+  persist: {
+    enabled: true,
+    strategies: [
+      {
+        storage: sessionStorage,
+        paths: ['themeColor']
+      }
+    ]
+  }
 })
 
 export default useStore

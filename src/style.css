@@ -4,6 +4,8 @@
   overflow: hidden;
   scroll-behavior: smooth;
   cursor: url('./assets//cursors/default.cur'), default;
+  transition: .3s;
+  color: var(--font-color-normal);
 }
 
 html,
@@ -23,12 +25,6 @@ a:focus {
   text-decoration: none;
 }
 
-
-:root {
-  --theme-color: #F4AF43;
-  --pointer : url('./assets/cursors/pointer.cur') ,pointer;
-}
-
 ::-webkit-scrollbar {
   width: 3px;
   height: 3px;
@@ -38,6 +34,19 @@ a:focus {
 
 ::-webkit-scrollbar-thumb {
   background: #aaa;
+}
+
+::selection { 
+  background: var(--selection-background); 
+  color: var(--selection-color); 
+} 
+::-moz-selection { 
+  background: var(--selection-background); 
+  color: var(--selection-color); 
+} 
+::-webkit-selection { 
+  background: var(--selection-background); 
+  color: var(--selection-color);
 }
 
 svg {
@@ -56,4 +65,9 @@ svg {
   overflow: scroll !important;
   overflow-x: hidden !important;
   overflow-y: scroll !important;
+}
+
+:root {
+  --theme-color: #F4AF43;
+  --pointer : url('./assets/cursors/pointer.cur') ,pointer;
 }
