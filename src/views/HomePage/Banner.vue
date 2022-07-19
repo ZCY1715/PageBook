@@ -9,6 +9,14 @@ export default {
     }
   },
   components: { ArrowDown },
+  computed: {
+    bannerImg() {
+      return this.store.config.bannerImg || this.store.randomImgAPI
+    },
+    nickname() {
+      return this.store.config.nickname
+    }
+  },
   methods: {
     scrollDown() {
       this.$el.parentNode.scrollTo({ top: window.innerHeight })
@@ -20,7 +28,7 @@ export default {
 
 <template>
   <div :class="$style.container">
-    <Image :src="store.config.bannerImg" :class="$style.bannerImg" @click="() => store.themeColor.switchThemeColor()" />
+    <Image :src="bannerImg" :class="$style.bannerImg" />
     <div :class="$style.arrowDown" @click="scrollDown">
       <span>
         <ArrowDown />
@@ -28,6 +36,11 @@ export default {
     </div>
     <div :class="$style.banner_wave_1"></div>
     <div :class="$style.banner_wave_2"></div>
+    <div :class="$style.bannerMain">
+      <div :date-text="nickname" :class="$style.nickname">
+        {{ nickname }}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -301,5 +314,222 @@ export default {
     animation: wave2 90s infinite;
     -webkit-animation: wave2 60s infinite;
   }
+}
+
+@keyframes animation-before {
+  0% {
+    clip-path: inset(0 0 0 0);
+  }
+
+  5% {
+    clip-path: inset(.8em 0 .4em 0);
+  }
+
+  10% {
+    clip-path: inset(.4em 0 .8em 0);
+  }
+
+  15% {
+    clip-path: inset(.1em 0 1em 0);
+  }
+
+  20% {
+    clip-path: inset(.3em 0 .6em 0);
+  }
+
+  25% {
+    clip-path: inset(.8em 0 .5em 0);
+  }
+
+  30% {
+    clip-path: inset(.5em 0 .8em 0);
+  }
+
+  35% {
+    clip-path: inset(1em 0 .1em 0);
+  }
+
+  40% {
+    clip-path: inset(.7em 0 .35em 0);
+  }
+
+  45% {
+    clip-path: inset(.5em 0 .2em 0);
+  }
+
+  50% {
+    clip-path: inset(.2em 0 .5em 0);
+  }
+
+  55% {
+    clip-path: inset(.35em 0 .7em 0);
+  }
+
+  60% {
+    clip-path: inset(.1em 0 .9em 0);
+  }
+
+  65% {
+    clip-path: inset(.8em 0 .46em 0);
+  }
+
+  70% {
+    clip-path: inset(.66em 0 .33em 0);
+  }
+
+  75% {
+    clip-path: inset(.48em 0 .23em 0);
+  }
+
+  80% {
+    clip-path: inset(.23em 0 .48em 0);
+  }
+
+  85% {
+    clip-path: inset(.39em 0 .79em 0);
+  }
+
+  90% {
+    clip-path: inset(.33em 0 .66em 0);
+  }
+
+  95% {
+    clip-path: inset(1em 0 .3em 0);
+  }
+
+  100% {
+    clip-path: inset(.62em 0 .29em 0);
+  }
+}
+
+@keyframes animation-after {
+  0% {
+    clip-path: inset(0 0 0 0);
+  }
+
+  5% {
+    clip-path: inset(.4em 0 .8em 0);
+  }
+
+  10% {
+    clip-path: inset(.8em 0 .4em 0);
+  }
+
+  15% {
+    clip-path: inset(1em 0 .1em 0);
+  }
+
+  20% {
+    clip-path: inset(.6em 0 .3em 0);
+  }
+
+  25% {
+    clip-path: inset(.5em 0 .8em 0);
+  }
+
+  30% {
+    clip-path: inset(.8em 0 .5em 0);
+  }
+
+  35% {
+    clip-path: inset(.1em 0 1em 0);
+  }
+
+  40% {
+    clip-path: inset(.35em 0 .7em 0);
+  }
+
+  45% {
+    clip-path: inset(.2em 0 .5em 0);
+  }
+
+  50% {
+    clip-path: inset(.5em 0 .2em 0);
+  }
+
+  55% {
+    clip-path: inset(.7em 0 .35em 0);
+  }
+
+  60% {
+    clip-path: inset(.9em 0 .1em 0);
+  }
+
+  65% {
+    clip-path: inset(.46em 0 .8em 0);
+  }
+
+  70% {
+    clip-path: inset(.33em 0 .66em 0);
+  }
+
+  75% {
+    clip-path: inset(.23em 0 .48em 0);
+  }
+
+  80% {
+    clip-path: inset(.48em 0 .23em 0);
+  }
+
+  85% {
+    clip-path: inset(.79em 0 .39em 0);
+  }
+
+  90% {
+    clip-path: inset(.66em 0 .33em 0);
+  }
+
+  95% {
+    clip-path: inset(.3em 0 1em 0);
+  }
+
+  100% {
+    clip-path: inset(.29em 0 .62em 0);
+  }
+}
+
+.bannerMain {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nickname {
+  display: inline-block;
+  font-size: 65px;
+  padding: 0 4px;
+  color: white;
+  height: 100px;
+  position: relative;
+  user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -khtml-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.nickname::before {
+  content: attr(date-text);
+  position: absolute;
+  left: -2px;
+  width: 100%;
+  height: 100%;
+  text-shadow: 2px 0 rgb(73, 235, 52);
+  animation: animation-before 10s infinite linear alternate-reverse;
+}
+
+.nickname::after {
+  content: attr(date-text);
+  position: absolute;
+  left: 2px;
+  width: 100%;
+  height: 100%;
+  text-shadow: -2px 0 rgb(248, 164, 86);
+  animation: animation-after 10s infinite linear alternate-reverse;
 }
 </style>

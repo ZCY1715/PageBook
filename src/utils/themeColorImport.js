@@ -1,3 +1,5 @@
+// 用于控制主题色
+
 export default class ThemeColorSwitcher {
   id = "themeColor_init"
   themeTypes = {

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import ThemeColorSwitcher from '../utils/themeColorImport'
-import config from '../utils/config'
+import config from '../utils/config.yaml'
 import { Drawer } from '../utils'
 
 const useStore = defineStore('store', {
@@ -8,6 +8,7 @@ const useStore = defineStore('store', {
     return {
       drawer: new Drawer(),
       themeColor: new ThemeColorSwitcher(),
+      randomImgAPI: 'https://www.dmoe.cc/random.php',
       config,
     }
   },
@@ -19,6 +20,10 @@ const useStore = defineStore('store', {
       {
         storage: sessionStorage,
         paths: ['themeColor', 'drawer']
+      },
+      {
+        storage: localStorage,
+        paths: []
       }
     ]
   }

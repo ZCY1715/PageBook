@@ -67,7 +67,7 @@ export default {
       ]">
         {{ title }}
       </span>
-      <span v-if="isTarget" @click.prevent="store.drawer.close">
+      <span v-if="isTarget" @click.prevent="() => store.drawer.close()">
         <ArrowDown />
       </span>
     </div>
