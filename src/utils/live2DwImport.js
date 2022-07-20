@@ -11,7 +11,7 @@ export default function live2dInit() {
       jsonPath: `/statics/live2dw/live2d-widget-model-koharu/assets/koharu.model.json`,
     },
     display: {
-      position: 'right',
+      position: 'left',
       width: 150,
       height: 300
     },

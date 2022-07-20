@@ -6,7 +6,8 @@ export default {
   data() {
     return {
       store: useStore(),
-      frontmatter: {}
+      frontmatter: {},
+      originalTitle: ''
     }
   },
   props: ['id'],
@@ -18,6 +19,14 @@ export default {
     bannerImg() {
       return this.frontmatter.img || this.store.randomImgAPI
     },
+  },
+  mounted() {
+    const title = document.querySelector('title')
+    this.originalTitle = title.innerText
+    title.innerText = this.frontmatter.title
+  },
+  beforeUnmount() {
+    document.querySelector('title').innerText = this.originalTitle
   }
 }
 

@@ -9,7 +9,7 @@ export default class DataSet {
   categories = []
 
   constructor() {
-    const moduleFiles = import.meta.globEager('./sources/*.md')
+    const moduleFiles = import.meta.globEager('./sources/*/*.md')
     this.Mds = Object.keys(moduleFiles).map(key => {
       const target = markRaw(moduleFiles[key].default)
       let frontmatter
@@ -18,9 +18,27 @@ export default class DataSet {
           frontmatter = e.frontmatter
         }
       })
-      const { title, categories, tags, date, description, img } = frontmatter
-      this.tags = distinct([...this.tags, ...tags])
-      this.categories = distinct([...this.categories, ...categories])
+      let { title, categories, tags, date, description, img } = frontmatter
+
+      if (!title) {
+        title = key.match(/sources\/(.*)\//)[1]
+      }
+
+      if (tags) {
+        if (tags instanceof Array) {
+          this.tags = distinct([...this.tags, ...tags])
+        } else {
+          this.tags = distinct([...this.tags, tags])
+        }
+      }
+      if (categories) {
+        if (categories instanceof Array) {
+          this.categories = distinct([...this.categories, ...categories])
+        } else {
+          this.categories = distinct([...this.categories, categories])
+        }
+      }
+
       return {
         id: SHA1(key),
         target,
@@ -34,6 +52,12 @@ export default class DataSet {
         }
       }
     })
+
+    this.Mds = this.Mds.filter(item => item.frontmatter.date)
+    this.Mds.sort((pre, cur) => {
+      return new Date(pre.frontmatter.date).getTime() - new Date(cur.frontmatter.date).getTime()
+    })
+
     console.log('md数据预加载完毕')
   }
   import(id) {

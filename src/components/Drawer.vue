@@ -185,7 +185,6 @@ export default {
   align-items: center;
   justify-content: center;
   border-radius: 0 10px 10px 0;
-  cursor: pointer;
   pointer-events: all;
   cursor: var(--pointer);
 }

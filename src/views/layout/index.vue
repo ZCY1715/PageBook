@@ -1,15 +1,15 @@
 <script>
-import ThemeSwitcher from '../../components/ThemeSwitcher.vue'
+import ToolBar from '../../components/ToolBar.vue'
 
 export default {
-  components: { ThemeSwitcher }
+  components: { ToolBar }
 }
 
 </script>
 
 <template>
   <div :class="[$style.container, 'scrollY']">
-    <ThemeSwitcher :class="$style.switcher" />
+    <ToolBar />
     <router-view />
   </div>
 </template>
@@ -20,11 +20,5 @@ export default {
   height: 100vh;
   background-color: var(--home-background);
   position: relative;
-}
-
-.switcher {
-  position: fixed;
-  top: 30px;
-  right: 30px;
 }
 </style>

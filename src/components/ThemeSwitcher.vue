@@ -29,12 +29,9 @@ export default {
 <style module>
 .container {
   position: relative;
-  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;
 }
 
 .container>:first-child {
