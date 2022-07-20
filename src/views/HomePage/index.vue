@@ -1,23 +1,27 @@
 <script>
 import Banner from './Banner.vue'
-import ThemeSwitcher from './ThemeSwitcher.vue'
+import useStore from '../../store'
 
 export default {
-  components: { Banner, ThemeSwitcher }
-
+  data() {
+    return {
+      store: useStore(),
+    }
+  },
+  components: { Banner },
+  methods: {
+    handleClick() {
+      const id = this.store.dataSet.Mds[0].id
+      this.$router.push({ name: 'DetailPage', params: { id } })
+    }
+  }
 }
 </script>
 
 <template>
   <Banner />
-  <ThemeSwitcher :class="$style.switcher" />
-  <div style="height: 2000px;width: 100%;"></div>
+  <div style="height: 2000px;width: 100%;" @click="handleClick"></div>
 </template>
 
 <style module>
-.switcher {
-  position: fixed;
-  top: 30px;
-  right: 30px;
-}
 </style>

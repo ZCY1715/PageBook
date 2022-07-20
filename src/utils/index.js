@@ -40,3 +40,8 @@ export class Drawer {
     return from > to && from === Number.MAX_SAFE_INTEGER
   }
 }
+
+// 字符串数组去重
+export function distinct(arr) {
+  return Array.from(new Set(arr))
+}

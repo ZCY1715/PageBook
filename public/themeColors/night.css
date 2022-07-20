@@ -6,7 +6,9 @@
   --drawer-no-target: rgb(90, 89, 89);
   --font-color-normal: #fff;
   --home-background: #232629;
-  --loading-color-1: #333333;
-  --loading-color-2: #666666;
+  --loading-color-1: #333;
+  --loading-color-2: #666;
   --wave-brightness: .3;
+  --mdbody-background: #343a40;
+  --mdbody-shadow: #666;
 }

@@ -1,19 +1,31 @@
-import { createRouter, createWebHistory } from "vue-router"
+import { createRouter, createWebHashHistory } from "vue-router"
 
 const routes = [
   {
     path: "/",
-    name: "HomePage",
     components: {
-      default: () => import("../views/HomePage/index.vue"),
+      default: () => import("../views/layout/index.vue"),
       About: () => import("../views/AboutPage/index.vue"),
       Code: () => import("../views/CodePage/index.vue")
-    }
+    },
+    children: [
+      {
+        path: '',
+        name: "HomePage",
+        component: () => import("../views/HomePage/index.vue")
+      },
+      {
+        path: 'detail/:id',
+        name: 'DetailPage',
+        props: route => ({ id: route.params.id }),
+        component: () => import('../views/DetailPage/index.vue')
+      }
+    ]
   },
 ]
 
 const Router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes
 })
 

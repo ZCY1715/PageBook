@@ -1,7 +1,7 @@
 <script>
-import Sun from '../../assets/svgs/Sun.svg?vueComponent'
-import Moon from '../../assets/svgs/Moon.svg?vueComponent'
-import useStore from '../../store'
+import Sun from '../assets/svgs/Sun.svg?vueComponent'
+import Moon from '../assets/svgs/Moon.svg?vueComponent'
+import useStore from '../store'
 
 export default {
   data() {
@@ -29,6 +29,7 @@ export default {
 <style module>
 .container {
   position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;

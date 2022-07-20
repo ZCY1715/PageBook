@@ -30,14 +30,14 @@ export default class ThemeColorSwitcher {
       styleNode.rel = "stylesheet"
       styleNode.type = "text/css"
       const type = this.themeColor
-      styleNode.href = `./themeColors/${type}.css`
+      styleNode.href = `/themeColors/${type}.css`
       document.head.appendChild(styleNode)
     }
   }
 
   switchThemeColor() {
     this.themeColor = this.themeColor === this.themeTypes.DAY ? this.themeTypes.NIGHT : this.themeTypes.DAY
-    document.getElementById(this.id).setAttribute('href', `./themeColors/${this.themeColor}.css`)
+    document.getElementById(this.id).setAttribute('href', `/themeColors/${this.themeColor}.css`)
   }
 
 }

@@ -25,16 +25,8 @@ export default {
   <!-- 侧栏 -->
   <Drawer v-for="(item, index) of drawerList" :data="item" :key="index" :index="index" />
   <!-- 主界面 -->
-  <div :class="[$style.container, 'scrollY']">
+  <div style="width: 100vw;height: 100vh;">
     <router-view />
   </div>
 </template>
 
-<style module>
-.container {
-  width: 100vw;
-  height: 100vh;
-  background-color: var(--home-background);
-  position: relative;
-}
-</style>
