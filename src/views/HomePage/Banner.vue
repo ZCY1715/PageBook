@@ -19,7 +19,8 @@ export default {
   },
   methods: {
     scrollDown() {
-      this.$el.parentNode.scrollTo({ top: window.innerHeight })
+      this.store.scrollNode &&
+        this.store.scrollNode.scrollTo({ top: window.innerHeight })
     }
   }
 }

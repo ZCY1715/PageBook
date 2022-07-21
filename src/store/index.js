@@ -10,8 +10,14 @@ const useStore = defineStore('store', {
       drawer: new Drawer(),
       themeColor: new ThemeColorSwitcher(),
       dataSet: new DataSet(),
-      randomImgAPI: 'https://www.dmoe.cc/random.php?' + Math.random() * 10000,
+      imgAPI: 'https://www.dmoe.cc/random.php?',
+      scrollNode: null,
       config,
+    }
+  },
+  getters: {
+    randomImgAPI() {
+      return this.imgAPI + "?i=" + Math.random() * 10000
     }
   },
   actions: {

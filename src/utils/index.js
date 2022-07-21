@@ -45,3 +45,15 @@ export class Drawer {
 export function distinct(arr) {
   return Array.from(new Set(arr))
 }
+
+// 节流
+export function throttle(fn, delay) {
+  let timer = null
+  return () => {
+    if (timer) return
+    fn()
+    timer = setTimeout(() => {
+      timer = null
+    }, delay)
+  }
+}

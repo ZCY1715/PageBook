@@ -1,8 +1,22 @@
 <script>
 import ToolBar from '../../components/ToolBar.vue'
+import useStore from '../../store'
 
 export default {
-  components: { ToolBar }
+  data() {
+    return {
+      store: useStore(),
+    }
+  },
+  components: { ToolBar },
+  watch: {
+    $route() {
+      this.$el.scrollTo({ top: 0 })
+    }
+  },
+  mounted() {
+    this.store.scrollNode = this.$el
+  }
 }
 
 </script>

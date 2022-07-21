@@ -1,33 +1,42 @@
 <script>
 import GoTop from '../assets/svgs/GoTop.svg?vueComponent'
+import useStore from '../store'
 
 export default {
   data() {
     return {
-      el: null,
       translateY: '',
       scrollTop: 0,
+      store: useStore(),
     }
   },
   components: { GoTop },
   methods: {
-    goTopClick() {
-      this.el.scrollTo({ top: 0 })
+    initScrollTop() {
+      if (this.el) {
+        this.scrollTop = this.el.scrollTop
+        this.translateY = this.scrollTo === 0 ? '-100vh' : '0'
+        this.el.addEventListener("scroll", () => {
+          this.scrollTop = this.el.scrollTop
+        })
+      }
+    }
+  },
+  computed: {
+    el() {
+      return this.store.scrollNode
     }
   },
   watch: {
     scrollTop(now) {
       this.translateY = now === 0 ? '-100vh' : '0'
+    },
+    el() {
+      this.initScrollTop()
     }
   },
   mounted() {
-    // 本层 ——> toolbar层 ——> 容器层
-    this.el = this.$el.parentNode.parentNode
-    this.scrollTop = this.el.scrollTop
-    this.translateY = this.scrollTo === 0 ? '-100vh' : '0'
-    this.el.addEventListener("scroll", () => {
-      this.scrollTop = this.el.scrollTop
-    })
+    this.initScrollTop()
   },
   beforeUnmount() {
     this.el.removeEventListener("scroll", () => {
@@ -38,7 +47,7 @@ export default {
 </script>
 
 <template>
-  <span @click="goTopClick" :class="$style.gotop" :style="'--h: ' + translateY">
+  <span @click="() => el.scrollTo({ top: 0 })" :class="$style.gotop" :style="'--h: ' + translateY">
     <GoTop />
   </span>
 </template>
