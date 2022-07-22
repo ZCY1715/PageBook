@@ -8,8 +8,10 @@
   --home-background: #232629;
   --loading-color-1: #333;
   --loading-color-2: #666;
-  --wave-brightness: .3;
+  --wave-brightness: 0;
   --mdbody-background: #343a40;
   --mdbody-shadow: #666;
   --toc-background: #576e74;
+  --posts-background: #333;
+  --post-shadow: #16181a;
 }

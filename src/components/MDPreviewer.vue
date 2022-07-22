@@ -1,5 +1,6 @@
 <script>
 import useStore from '../store'
+import Clipboard from 'clipboard'
 
 export default {
   data() {
@@ -7,19 +8,29 @@ export default {
       store: useStore(),
       md: null,
       toc: [],
-      scrollTop: 0,
-      tocTop: 30,
       elementInViewIndex: 0,
     }
   },
   props: ['id'],
   computed: {
+    scrollNode() {
+      return this.store.scrollNode
+    },
+    scrollTop() {
+      return this.store.scrollData.currentScrollTop
+    },
+    tocTop() {
+      return Math.max(this.scrollTop - 350, 30)
+    },
     tocLevel() {
       return this.store.config.tocLevel
     },
-    scrollNode() {
-      return this.store.scrollNode
-    }
+    copySuffix() {
+      return this.store.config.copySuffix
+    },
+    copyLimite() {
+      return this.store.config.copyLimite
+    },
   },
   methods: {
     createToc() {
@@ -31,7 +42,6 @@ export default {
       }))
     },
     scrollHandle() {
-      this.scrollTop = this.scrollNode.scrollTop
       const containerHeight = this.scrollNode.clientHeight
       for (let i = 0; i < this.toc.length; i++) {
         const element = this.toc[i].element
@@ -43,15 +53,34 @@ export default {
       }
     },
     createCopyBth() {
-
+      const preNodes = document.querySelectorAll(".markdown-body pre")
+      for (const preNode of preNodes) {
+        const copyNode = document.createElement("span")
+        copyNode.innerText = "复制"
+        copyNode.className = 'copyBth'
+        preNode.parentNode.appendChild(copyNode)
+        const clipboard = new Clipboard(copyNode, {
+          target: () => preNode,
+          text: () => {
+            const content = preNode.innerText
+            return content.length < this.copyLimite ? content : content + "\n" + this.copySuffix
+          }
+        })
+        clipboard.on("success", e => {
+          const node = e.trigger
+          node.className = "copySuccess"
+          node.innerText = "成功"
+          setTimeout(() => {
+            node.innerText = "复制"
+            node.className = 'copyBth'
+          }, 1000)
+        })
+      }
     }
   },
   watch: {
-    scrollNode() {
-      this.scrollNode && this.scrollNode.addEventListener("scroll", this.scrollHandle)
-    },
-    scrollTop(now) {
-      this.tocTop = Math.max(now - 350, 30)
+    scrollTop() {
+      this.scrollHandle()
     }
   },
   created() {
@@ -60,11 +89,7 @@ export default {
   mounted() {
     this.createToc()
     this.createCopyBth()
-    this.scrollNode && this.scrollNode.addEventListener("scroll", this.scrollHandle)
   },
-  beforeUnmount() {
-    this.scrollNode.removeEventListener("scroll", this.scrollHandle)
-  }
 }
 
 </script>
@@ -153,8 +178,40 @@ export default {
   flex-grow: 1;
 }
 
+.markdown-body .code-block {
+  position: relative;
+}
+
 .markdown-body pre {
   margin: 20px;
+}
+
+.markdown-body pre:hover+.copyBth,
+.markdown-body pre:hover+.copySuccess,
+.copyBth:hover,
+.copySuccess:hover {
+  opacity: 1;
+}
+
+.copyBth,
+.copySuccess {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  padding: 5px 10px 5px 10px;
+  border-radius: 10px;
+  opacity: 0;
+  cursor: var(--pointer);
+  color: #fff;
+  transition: 1s;
+}
+
+.copyBth {
+  background-color: rgb(137, 205, 250);
+}
+
+.copySuccess {
+  background-color: greenyellow;
 }
 
 .markdown-body pre>code {
@@ -217,6 +274,21 @@ export default {
   left: -5px;
   color: var(--theme-color);
   animation: showAndHide 2s linear infinite;
+}
+
+.markdown-body blockquote {
+  position: relative;
+  margin-left: 10px;
+  padding-left: 10px;
+}
+
+.markdown-body blockquote::before {
+  content: "";
+  position: absolute;
+  left: 0px;
+  width: 3px;
+  height: 100%;
+  background-color: var(--toc-background);
 }
 
 @keyframes showAndHide {

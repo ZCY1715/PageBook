@@ -1,5 +1,5 @@
 import { markRaw } from 'vue'
-import { distinct } from '../utils'
+import { distinct, clone } from '../utils'
 import SHA1 from '../utils/sha1'
 
 export default class DataSet {
@@ -84,6 +84,12 @@ export default class DataSet {
       id: this.Mds[index + 1].id,
       ...this.Mds[index + 1].frontmatter
     }
+  }
+  getMds() {
+    return this.Mds.map(item => ({
+      id: item.id,
+      ...item.frontmatter
+    }))
   }
   getMDsByTag(tag) {
     const mds = this.Mds.filter(item => item.frontmatter.tags.includes(tag))

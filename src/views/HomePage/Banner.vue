@@ -1,6 +1,7 @@
 <script>
 import useStore from "../../store"
 import ArrowDown from '../../assets/svgs/ArrowDown.svg?vueComponent'
+import typed from '../../utils/typed'
 
 export default {
   data() {
@@ -15,6 +16,9 @@ export default {
     },
     nickname() {
       return this.store.config.nickname
+    },
+    motto() {
+      return this.store.config.motto
     }
   },
   methods: {
@@ -22,6 +26,9 @@ export default {
       this.store.scrollNode &&
         this.store.scrollNode.scrollTo({ top: window.innerHeight })
     }
+  },
+  mounted() {
+    typed(this.$refs.motto, this.motto)
   }
 }
 
@@ -41,6 +48,10 @@ export default {
       <div :date-text="nickname" :class="$style.nickname">
         {{ nickname }}
       </div>
+      <div :class="$style.motto">
+        <span ref="motto"></span>
+        <span>※</span>
+      </div>
     </div>
   </div>
 </template>
@@ -49,6 +60,7 @@ export default {
 .container {
   width: 100vw;
   height: 100vh;
+  position: relative;
 }
 
 .bannerImg {
@@ -62,7 +74,7 @@ export default {
   z-index: 10;
   width: 100%;
   height: 70px;
-  top: calc(100vh - 70px);
+  bottom: 0;
   display: flex;
   justify-content: center;
   cursor: var(--pointer);
@@ -495,6 +507,7 @@ export default {
   position: absolute;
   top: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -532,5 +545,15 @@ export default {
   height: 100%;
   text-shadow: -2px 0 rgb(248, 164, 86);
   animation: animation-after 10s infinite linear alternate-reverse;
+}
+
+.motto {
+  margin-top: 60px;
+  height: 50px;
+}
+
+.motto span {
+  font-size: 40px;
+  color: #fff;
 }
 </style>

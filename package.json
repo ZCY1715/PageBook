@@ -8,6 +8,7 @@
     "build": "vite build"
   },
   "dependencies": {
+    "clipboard": "^2.0.11",
     "highlight.js": "^11.6.0",
     "pinia": "^2.0.16",
     "pinia-plugin-persist": "^1.0.0",

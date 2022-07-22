@@ -20,7 +20,6 @@ export default {
     this.$el.removeEventListener("scroll", () => {
       this.store.scrollData.currentScrollTop = this.$el.scrollTop
     })
-
   }
 }
 
