@@ -9,13 +9,18 @@ export default {
     }
   },
   components: { ToolBar },
-  watch: {
-    $route() {
-      this.$el.scrollTo({ top: 0 })
-    }
-  },
   mounted() {
     this.store.scrollNode = this.$el
+    this.$el.scrollTo({ top: this.store.scrollData.currentScrollTop })
+    this.$el.addEventListener("scroll", () => {
+      this.store.scrollData.currentScrollTop = this.$el.scrollTop
+    })
+  },
+  beforeUnmount() {
+    this.$el.removeEventListener("scroll", () => {
+      this.store.scrollData.currentScrollTop = this.$el.scrollTop
+    })
+
   }
 }
 

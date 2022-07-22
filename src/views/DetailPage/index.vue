@@ -17,7 +17,7 @@ export default {
   },
   computed: {
     bannerImg() {
-      return this.frontmatter.img || this.store.randomImgAPI
+      return this.frontmatter.img || this.store.randomImgAPI()
     },
   },
   mounted() {

@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     createToc() {
-      const titles = Array.from(this.$el.querySelectorAll('h1,h2,h3,h4,h5,h6'))
+      const titles = Array.from(this.$el.querySelectorAll(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].slice(0, this.tocLevel).join(",")))
       this.toc = titles.map(item => ({
         value: item.innerText,
         element: item,
@@ -103,7 +103,7 @@ export default {
   background-color: var(--toc-background);
   transition-property: top, background-color;
   transition-duration: 0s, .3s;
-  height: min(400px, calc(30px * var(--z)));
+  height: min(400px, calc(30px + 30px * var(--z)));
   padding: 20px 10px 20px 10px;
   border-radius: 10px 0 0 10px;
 }

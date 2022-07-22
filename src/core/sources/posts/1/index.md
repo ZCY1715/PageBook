@@ -10,15 +10,6 @@ date: 2022-05-17
 
 # Nginx
 
-```js
-let a = 1
-const b = 2
-function c(){
-    return "sss"
-}
-
-```
-
 ## 安装
 
 在[`Nginx官网`](https://nginx.org/en/download.html)下载，并上传至服务器 /root 路径下, 以下是 1.21.6版本

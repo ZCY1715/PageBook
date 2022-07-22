@@ -10,28 +10,45 @@ const useStore = defineStore('store', {
       drawer: new Drawer(),
       themeColor: new ThemeColorSwitcher(),
       dataSet: new DataSet(),
-      imgAPI: 'https://www.dmoe.cc/random.php?',
+      randomImg: {
+        api: 'https://www.dmoe.cc/random.php',
+        randomNonce: 0,
+      },
       scrollNode: null,
+      scrollData: {
+        routeHistory: [],
+        currentScrollTop: 0,
+      },
       config,
     }
   },
   getters: {
-    randomImgAPI() {
-      return this.imgAPI + "?i=" + Math.random() * 10000
-    }
+
   },
   actions: {
+    randomImgAPI() {
+      this.randomImg.randomNonce = Math.round(Math.random() * 100000000)
+      const nonce = this.randomImg.randomNonce
+      const api = this.config.randomImgAPI || this.randomImg.api
+      return `${api}?i=${nonce}`
+    }
   },
   persist: {
     enabled: true,
     strategies: [
       {
         storage: sessionStorage,
-        paths: ['themeColor', 'drawer']
+        paths: [
+          'themeColor',
+          'drawer',
+          'scrollData',
+        ]
       },
       {
         storage: localStorage,
-        paths: []
+        paths: [
+          'randomImg'
+        ]
       }
     ]
   }

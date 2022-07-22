@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from "vue-router"
+import useStore from "../store"
 
 const routes = [
   {
@@ -27,6 +28,24 @@ const routes = [
 const Router = createRouter({
   history: createWebHashHistory(),
   routes
+})
+
+// 进入新路由时回到顶部, 路由回退时回到历史高度
+Router.beforeEach((to, from) => {
+  const store = useStore()
+  const scrollNode = store.scrollNode
+  if (!scrollNode) return
+
+  if (to.fullPath === store.scrollData.routeHistory.at(-1)?.path) {
+    const preRoute = store.scrollData.routeHistory.pop()
+    scrollNode.scrollTo({ top: preRoute.scrollTop })
+  } else {
+    store.scrollData.routeHistory.push({
+      path: from.fullPath,
+      scrollTop: scrollNode.scrollTop
+    })
+    scrollNode.scrollTo({ top: 0 })
+  }
 })
 
 export default Router
