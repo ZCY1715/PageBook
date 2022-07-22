@@ -42,6 +42,9 @@ export default {
         }
       }
     },
+    createCopyBth() {
+
+    }
   },
   watch: {
     scrollNode() {

@@ -34,7 +34,7 @@ const Router = createRouter({
 Router.beforeEach((to, from) => {
   const store = useStore()
   const scrollNode = store.scrollNode
-  if (!scrollNode) return
+  if (!scrollNode) return true
 
   if (to.fullPath === store.scrollData.routeHistory.at(-1)?.path) {
     const preRoute = store.scrollData.routeHistory.pop()
