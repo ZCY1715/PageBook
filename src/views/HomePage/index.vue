@@ -14,7 +14,10 @@ export default {
       const id = this.store.dataSet.Mds[0].id
       this.$router.push({ name: 'DetailPage', params: { id } })
     }
-  }
+  },
+  mounted() {
+    console.log('？？？')
+  },
 }
 </script>
 

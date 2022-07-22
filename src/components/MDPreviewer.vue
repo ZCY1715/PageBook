@@ -56,6 +56,7 @@ export default {
   },
   mounted() {
     this.createToc()
+    this.createCopyBth()
     this.scrollNode && this.scrollNode.addEventListener("scroll", this.scrollHandle)
   },
   beforeUnmount() {

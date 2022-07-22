@@ -30,6 +30,7 @@ a:focus {
   height: 3px;
   background: #eee;
   border-radius: 4px;
+  transition: .3s;
 }
 
 ::-webkit-scrollbar-thumb {
