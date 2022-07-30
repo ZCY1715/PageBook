@@ -53,12 +53,12 @@ export default Router
 // 侧边抽屉列表
 // title 保持 2~3 个字
 export const drawerList = [
-  {
-    name: 'About',
-    title: '关于',
-  },
-  {
-    name: 'Code',
-    title: '代码库',
-  }
+  // {
+  //   name: 'About',
+  //   title: '关于',
+  // },
+  // {
+  //   name: 'Code',
+  //   title: '代码库',
+  // }
 ]
