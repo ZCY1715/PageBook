@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "p": "git add . && git commit -m '' && git push"
   },
   "dependencies": {
     "clipboard": "^2.0.11",
