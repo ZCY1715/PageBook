@@ -5,7 +5,7 @@ tags:
 categories:
   - 个人笔记
 description: 整理一下Nginx学习要点，基本使用
-date: 2022-05-17
+publishTime: 2022-05-17
 ---
 
 # Nginx

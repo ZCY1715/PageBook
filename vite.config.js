@@ -5,6 +5,7 @@ import ViteYaml from '@modyfi/vite-plugin-yaml'
 import Markdown, { code, link, meta } from 'vite-plugin-md'
 import copy from 'rollup-plugin-copy'
 import hljs from 'highlight.js'
+import MarkdownItImsize from 'markdown-it-imsize'
 
 
 export default defineConfig({
@@ -37,6 +38,9 @@ export default defineConfig({
 
           return ''
         }
+      },
+      markdownItSetup(md) {
+        md.use(MarkdownItImsize, { autofill: true })
       }
     }),
     copy({

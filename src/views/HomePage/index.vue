@@ -3,6 +3,9 @@ import Banner from './Banner.vue'
 import useStore from '../../store'
 import Boy from '../../assets/boy.webp'
 import Girl from '../../assets/girl.webp'
+import Date from '../../assets/svgs/Date.svg?vueComponent'
+import Category from '../../assets/svgs/Category.svg?vueComponent'
+import Tag from '../../assets/svgs/Tag.svg?vueComponent'
 
 export default {
   data() {
@@ -12,10 +15,10 @@ export default {
       Girl,
     }
   },
-  components: { Banner },
+  components: { Banner, Date, Category, Tag },
   computed: {
     isDay() {
-      return this.store.themeColor.themeColor === this.store.themeColor.themeTypes.DAY
+      return this.store.themeColor.isDayModel()
     },
     imgTop() {
       return Math.max(50, this.store.scrollData.currentScrollTop - 600)
@@ -29,13 +32,15 @@ export default {
     },
   },
   methods: {
-    clickHandle() {
-      const id = this.store.dataSet.Mds[0].id
+    toDetail(id) {
       this.$router.push({ name: 'DetailPage', params: { id } })
+    },
+    toTag(tag) {
+
+    },
+    toCategory(category) {
+
     }
-  },
-  mounted() {
-    console.log(this.posts)
   }
 }
 </script>
@@ -52,10 +57,31 @@ export default {
         <div :class="$style.posts" v-else>
           <div v-for="(item, index) of posts" :class="[$style.postItem, index % 2 ? $style.reverseItem : '']"
             :key="item.id">
-            <div :class="$style.imgBox">
+            <div :class="$style.imgBox" @click="() => toDetail(item.id)">
               <Image :src="item.img" :class="$style.postImg" />
             </div>
-            <div></div>
+            <div :class="[$style.postDetail, index % 2 ? $style.reverseItem : '']">
+              <div :class="$style.postTitle" @click="() => toDetail(item.id)">
+                {{ item.title }}
+              </div>
+              <div :class="$style.publishTime">
+                <Date />
+                {{ item.publishTime }}
+              </div>
+              <div :class="$style.description" @click="() => toDetail(item.id)">
+                {{ item.description }}
+              </div>
+              <div :class="$style.categories">
+                <Category />
+                <span v-for="(category, index) of item.categories" :key="index" @click="() => toCategory(category)">{{
+                    category
+                }}</span>
+              </div>
+              <div :class="$style.tags" v-if="item.tags.length !== 0">
+                <Tag />
+                <span v-for="(tag, index) of item.tags" :key="index" @click="() => toTag(tag)">{{ tag }}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -71,7 +97,7 @@ export default {
   flex-direction: column;
   align-items: center;
   min-height: 600px;
-  margin-bottom: 200px;
+  margin-bottom: 150px;
 }
 
 .wrapper {
@@ -142,7 +168,10 @@ export default {
   box-shadow: var(--post-shadow) 0 0 10px;
   border-radius: 20px;
   display: flex;
-  align-items: center;
+}
+
+.postItem:hover {
+  box-shadow: var(--post-shadow) 0 0 20px;
 }
 
 .reverseItem {
@@ -167,5 +196,86 @@ export default {
 
 .postItem:hover .postImg {
   transform: scale(1.3) rotate(15deg);
+}
+
+.postDetail {
+  width: calc(100% - 450px);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+  padding-right: 40px;
+  margin-top: 20px;
+}
+
+.postTitle {
+  font-size: 20px;
+  line-height: 30px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+  cursor: var(--pointer);
+}
+
+.postTitle:hover {
+  color: var(--theme-color);
+}
+
+.publishTime {
+  margin-top: 10px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.publishTime svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--theme-color);
+  margin-right: 10px;
+}
+
+.description {
+  margin-top: 20px;
+  text-indent: 2em;
+  line-height: 25px;
+  height: 125px;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  font-size: 18px;
+  cursor: var(--pointer);
+}
+
+.categories,
+.tags {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.categories span,
+.tags span {
+  font-size: 14px;
+  color: #666;
+  letter-spacing: 1px;
+  padding-left: 15px;
+  cursor: var(--pointer);
+}
+
+.categories span:hover,
+.tags span:hover {
+  color: var(--theme-color);
+}
+
+.categories svg,
+.tags svg {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  fill: var(--theme-color);
 }
 </style>

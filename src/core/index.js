@@ -1,5 +1,5 @@
 import { markRaw } from 'vue'
-import { distinct, clone } from '../utils'
+import { distinct, formateTime } from '../utils'
 import SHA1 from '../utils/sha1'
 
 export default class DataSet {
@@ -14,7 +14,7 @@ export default class DataSet {
 
   initPosts() {
     const moduleFiles = import.meta.globEager('./sources/posts/*/*.md')
-    this.Mds = Object.keys(moduleFiles).map(key => {
+    const posts = Object.keys(moduleFiles).map(key => {
       const target = markRaw(moduleFiles[key].default)
       let frontmatter
       target.setup(null, {
@@ -22,10 +22,26 @@ export default class DataSet {
           frontmatter = e.frontmatter
         }
       })
-      let { title, categories, tags, date, description, img } = frontmatter
+      return {
+        id: SHA1(key),
+        key,
+        target,
+        frontmatter,
+      }
+    })
+
+    this.Mds = []
+    for (const post of posts) {
+      let { title, categories, tags, description, img, publishTime, updateTime } = post.frontmatter
+
+      if (!publishTime) continue
+      publishTime = formateTime(new Date(publishTime))
+      if (updateTime) {
+        updateTime = formateTime(new Date(updateTime))
+      }
 
       if (!title) {
-        title = key.match(/\/sources\/posts\/.*\/(.*?)\.md$/)[1]
+        title = post.key.match(/\/sources\/posts\/.*\/(.*?)\.md$/)[1]
       }
 
       if (tags) {
@@ -33,32 +49,40 @@ export default class DataSet {
           this.tags = distinct([...this.tags, ...tags])
         } else {
           this.tags = distinct([...this.tags, tags])
+          tags = [tags]
         }
+      } else {
+        tags = []
       }
+
       if (categories) {
         if (categories instanceof Array) {
           this.categories = distinct([...this.categories, ...categories])
         } else {
           this.categories = distinct([...this.categories, categories])
+          categories = [categories]
         }
+      } else {
+        categories = [post.key.match(/posts\/(.+?)\/.+?\.md$/)[1]]
+        this.categories = distinct([...this.categories, ...categories])
       }
 
-      return {
-        id: SHA1(key),
-        target,
+      this.Mds.push({
+        id: post.id,
+        target: post.target,
         frontmatter: {
           title,
           categories,
           tags,
-          date,
           description,
-          img
+          img,
+          publishTime,
+          updateTime
         }
-      }
-    })
+      })
+    }
 
-    this.Mds = this.Mds.filter(item => item.frontmatter.date)
-    // 按时间从后往前
+    // 按时间从后往前   
     this.Mds.sort((pre, cur) => {
       return new Date(cur.frontmatter.date).getTime() - new Date(pre.frontmatter.date).getTime()
     })

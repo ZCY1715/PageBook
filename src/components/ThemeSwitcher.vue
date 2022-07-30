@@ -12,8 +12,8 @@ export default {
   components: { Sun, Moon },
   computed: {
     isDay() {
-      return this.store.themeColor.themeColor === this.store.themeColor.themeTypes.DAY
-    }
+      return this.store.themeColor.isDayModel()
+    },
   }
 }
 

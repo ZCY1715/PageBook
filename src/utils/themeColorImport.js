@@ -1,3 +1,10 @@
+function isDay() {
+  const date = new Date()
+  const hour = date.getHours()
+  return hour >= 7 && hour < 19
+}
+
+
 // 用于控制主题色
 
 export default class ThemeColorSwitcher {
@@ -12,14 +19,12 @@ export default class ThemeColorSwitcher {
     if (themeColor && [this.themeTypes.DAY, this.themeTypes.NIGHT].includes(themeColor)) {
       this.themeColor = themeColor
     } else {
-      this.themeColor = this.isDay() ? this.themeTypes.DAY : this.themeTypes.NIGHT
+      this.themeColor = isDay() ? this.themeTypes.DAY : this.themeTypes.NIGHT
     }
   }
 
-  isDay() {
-    const date = new Date()
-    const hour = date.getHours()
-    return hour >= 7 && hour < 19
+  isDayModel() {
+    return this.themeColor === this.themeTypes.DAY
   }
 
   initThemeColor() {
@@ -36,7 +41,7 @@ export default class ThemeColorSwitcher {
   }
 
   switchThemeColor() {
-    this.themeColor = this.themeColor === this.themeTypes.DAY ? this.themeTypes.NIGHT : this.themeTypes.DAY
+    this.themeColor = this.isDayModel() ? this.themeTypes.NIGHT : this.themeTypes.DAY
     document.getElementById(this.id).setAttribute('href', `/themeColors/${this.themeColor}.css`)
   }
 

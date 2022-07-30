@@ -46,7 +46,7 @@ export default {
       for (let i = 0; i < this.toc.length; i++) {
         const element = this.toc[i].element
         const { top, bottom } = element.getBoundingClientRect()
-        if (top >= 0 && bottom <= containerHeight) {
+        if (top >= -20 && bottom <= containerHeight) {
           this.elementInViewIndex = i
           return
         }
@@ -328,5 +328,10 @@ export default {
 .markdown-body h5:hover::after,
 .markdown-body h6:hover::after {
   width: 70%;
+}
+
+.markdown-body p img {
+  width: 100%;
+  aspect-ratio: 2;
 }
 </style>

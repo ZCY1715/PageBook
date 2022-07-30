@@ -57,3 +57,15 @@ export function throttle(fn, delay) {
     }, delay)
   }
 }
+
+// 时间格式化
+export function formateTime(date = new Date()) {
+  const FixZero = num => num > 9 ? num : '0' + num
+  const YYYY = date.getUTCFullYear()
+  const MM = FixZero(date.getUTCMonth() + 1)
+  const DD = FixZero(date.getUTCDate())
+  const hh = FixZero(date.getUTCHours())
+  const mm = FixZero(date.getUTCMinutes())
+  const ss = FixZero(date.getUTCSeconds())
+  return `${YYYY}-${MM}-${DD} ${hh}:${mm}:${ss}`
+}
